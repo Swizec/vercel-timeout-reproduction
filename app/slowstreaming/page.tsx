@@ -1,9 +1,8 @@
 import { Suspense } from "react";
-import fs from "fs";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { OpenAIStream } from "ai";
-import { longtext } from "./longtext.json";
+import json from "../longtext.json";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -42,14 +41,24 @@ async function askForFeedback(title: string, content: string) {
     return feedback;
 }
 
-export const SlowStreamingComponent = async () => {
+const SlowStreamingComponent = async () => {
     const feedback = await askForFeedback(
         "Async React with NextJS 13",
-        longtext
+        json.longtext
     );
     const stream = OpenAIStream(feedback);
 
-    return <AIStreamReader reader={stream.getReader()} />;
+    return (
+        <>
+            This will timeout, but only when deployed 👇
+            <br />
+            Notice it stops streaming after 15s no matter what. Even in the
+            middle of a sentence.
+            <br />
+            <br />
+            <AIStreamReader reader={stream.getReader()} />
+        </>
+    );
 };
 
 async function AIStreamReader({
@@ -80,3 +89,5 @@ async function AIStreamReader({
         </>
     );
 }
+
+export default SlowStreamingComponent;
