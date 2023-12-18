@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Suspense } from "react";
-import { SlowComponent } from "./SlowComponent";
+import { SlowStreamingComponent } from "./SlowStreamingComponent";
 
 export default function Home() {
     return (
@@ -35,8 +35,13 @@ export default function Home() {
                 style={{ flexDirection: "column" }}
             >
                 This will timeout, but only when deployed 👇
+                <br />
+                Notice it stops streaming after 15s no matter what. Even in the
+                middle of a sentence.
+                <br />
+                <br />
                 <Suspense fallback={<p>Loading</p>}>
-                    <SlowComponent />
+                    <SlowStreamingComponent />
                 </Suspense>
             </div>
 
