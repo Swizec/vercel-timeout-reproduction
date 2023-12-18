@@ -7,7 +7,7 @@ export default function Home() {
             middle of a sentence.
             <br />
             <br />
-            <a href="/slowstreaming">start</a>
+            <a href={`/slowstreaming?rand=${Math.random()}`}>start</a>
         </main>
     );
 }

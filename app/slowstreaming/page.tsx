@@ -41,7 +41,7 @@ async function askForFeedback(title: string, content: string) {
     return feedback;
 }
 
-const SlowStreamingComponent = async () => {
+const SlowStreamingComponent = async ({ searchParams }) => {
     const feedback = await askForFeedback(
         "Async React with NextJS 13",
         json.longtext
@@ -54,6 +54,8 @@ const SlowStreamingComponent = async () => {
             <br />
             Notice it stops streaming after 15s no matter what. Even in the
             middle of a sentence.
+            <br />
+            Search param to prevent static build: {searchParams.rand}
             <br />
             <br />
             <AIStreamReader reader={stream.getReader()} />
