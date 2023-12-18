@@ -41,7 +41,11 @@ async function askForFeedback(title: string, content: string) {
     return feedback;
 }
 
-const SlowStreamingComponent = async ({ searchParams }) => {
+const SlowStreamingComponent = async ({
+    searchParams,
+}: {
+    searchParams: { [key: string]: string | undefined };
+}) => {
     const feedback = await askForFeedback(
         "Async React with NextJS 13",
         json.longtext
